@@ -1,6 +1,6 @@
 let producto = prompt("De cuantos pisos desea comprar la torta?")
 while(producto) {
-    switch (producto =! "ESC"){
+    switch (producto){
         case "1":
             alert ("Eligio la torta de un piso")
         let preguntacuotas = prompt("En cuantas cuotas desea la compra?");
