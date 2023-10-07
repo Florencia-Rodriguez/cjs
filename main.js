@@ -1,60 +1,55 @@
-//creo la funcion para calcular cuotas
-function calcularCostoPorCuotas(pisos, cuotas) {
-    let costoPorCuota;
-
-    switch (pisos) {
-        case 1:
-            if (cuotas === 1) {
-                costoPorCuota = 7000;
-            } else if (cuotas === 2) {
-                costoPorCuota = 3500;
-            } else if (cuotas === 3) {
-                costoPorCuota = 2333;
-            } else {
-                alert("El máximo de cuotas posible es 3");
-            }
-            break;
-        case 2:
-            if (cuotas === 1) {
-                costoPorCuota = 10000;
-            } else if (cuotas === 2) {
-                costoPorCuota = 5000;
-            } else if (cuotas === 3) {
-                costoPorCuota = 3333;
-            } else {
-                alert("El máximo de cuotas posible es 3");
-            }
-            break;
-        default:
-            alert("No es posible esa cantidad de pisos");
+//array de tortas
+const tortas = [
+    {
+        nombre: "marquise",
+        preciosPorCuotas: {
+            1: 6000,
+            2: 3000,
+            3: 2000
+        }
+    },
+    {
+        nombre: "chocotorta",
+        preciosPorCuotas: {
+            1: 4000,
+            2: 2000,
+            3: 1333
+        }
+    },
+    {
+        nombre: "cheesecake",
+        preciosPorCuotas: {
+            1: 6000,
+            2: 3000,
+            3: 2000 
+        }
     }
+];
 
-    if (costoPorCuota) {
-        alert("El costo por mes es de " + costoPorCuota + " pesos durante " + cuotas + " meses.");
-    }
-}
-
-//creo la funcion para elegir torta
+//creo la funcion de comprar torta
 function comprarTorta() {
-    let pisos = parseInt(prompt("¿De cuántos pisos desea comprar la torta?"));
+    let tortaNombre;
+    do {
+        tortaNombre = prompt("¿Qué torta desea comprar?").toLowerCase();
+    } while (!tortas.some(torta => torta.nombre === tortaNombre));
+//metodo de busqueda
+    const torta = tortas.find(torta => torta.nombre === tortaNombre);
+    alert("Eligió la torta de " + torta.nombre);
 
-    switch (pisos) {
-        case 1:
-            alert("Eligió la torta de un piso");
-            let cuotasUno = parseInt(prompt("¿En cuántas cuotas desea la compra?"));
-            //llama a la funcion de calcular cuotas creada anteriormente
-            calcularCostoPorCuotas(1, cuotasUno);
-            break;
-        case 2:
-            alert("Eligió la torta de dos pisos");
-            let cuotasDos = parseInt(prompt("¿En cuántas cuotas desea la compra?"));
-            //llama a la funcion de calcular cuotas creada anteriormente
-            calcularCostoPorCuotas(2, cuotasDos);
-            break;
-        default:
-            alert("No es posible esa cantidad de pisos");
-    }
+    let cuotas;
+    do {
+        cuotas = parseInt(prompt("¿En cuántas cuotas desea la compra?"));
+    } while (!(cuotas in torta.preciosPorCuotas));
+
+    const costoPorCuota = torta.preciosPorCuotas[cuotas];
+    alert("El costo por mes es de " + costoPorCuota + " pesos durante " + cuotas + " meses.");
 }
 
-// Llama a la funcion para iniciar la compra
+// Llama a la función para iniciar la compra
 comprarTorta();
+
+
+
+
+
+
