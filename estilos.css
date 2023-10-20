@@ -1,0 +1,38 @@
+
+@font-face {
+    font-family: "beautiful";
+    src: url(./assets/Beautiful.otf);
+}
+
+body {
+background-color: #FFE8F1  ;
+}
+
+.imagen-logo {
+    width: 90px;
+    height: 70px;
+}
+
+.barra-navegacion {
+    display: block;
+    padding: 0px;
+    margin: auto;
+    background-color: #f7d2d9;
+    position: sticky;
+    top: 0px;
+}
+
+.estilo-logo{
+    font-family: "beautiful";
+    font-weight: lighter;
+    font-size: 35px;
+    color: #3D2A0E;
+    
+}
+
+.texto1{
+    font-size: 25px;
+    text-align: center;
+    color: #3D2A0E;
+    margin: 15px;
+}
