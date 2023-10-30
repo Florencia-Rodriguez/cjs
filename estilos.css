@@ -36,3 +36,132 @@ background-color: #FFE8F1  ;
     color: #3D2A0E;
     margin: 15px;
 }
+
+.imagen{
+    height: 90%;
+    width: 90%;
+}
+
+.oculto {
+    display: none;
+}
+
+#cartel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px; /* Aumenta el ancho */
+    height: 330px; /* Aumenta la altura */
+    background-color: #CE5484; /* Cambia el color de fondo */
+    color: white; /* Cambia el color del texto */
+    border-radius: 10px; /* Agrega bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Agrega sombra */
+    padding: 20px;
+    text-align: center; /* Centra el texto */
+}
+
+#cartel h2 {
+    font-size: 24px; /* Cambia el tamaño de fuente del título */
+    margin-bottom: 10px;
+}
+
+#cartel p {
+    font-size: 16px; /* Cambia el tamaño de fuente del texto */
+    margin-bottom: 20px;
+}
+
+#cartel button {
+    background-color: #FFC4DB ; 
+    color: white ; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#cartel button:hover {
+    color: #CE5484;
+}
+
+.estilo-form {
+    margin-bottom: 15px; /* Espacio entre grupos de formulario */
+}
+
+label {
+    display: block; /* Coloca las etiquetas en una línea nueva */
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 5px; /* Espacio entre campos */
+}
+
+form button[type="submit"] {
+    background-color: #FFC4DB;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px; /* Espacio entre el botón "Enviar" y "Cerrar" */
+    margin-top: 10px;
+}
+
+form button#cerrarCartel {
+    background-color: #FFC4DB;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#cartel2 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px; 
+    height: 330px; 
+    background-color: #CE5484; 
+    color: white; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    padding: 20px;
+    text-align: center;
+}
+
+#cartel2 h2 {
+    font-size: 24px; 
+    margin-bottom: 10px;
+}
+
+#cartel2 p {
+    font-size: 16px; 
+    margin-bottom: 20px;
+}
+
+#cartel2 button {
+    background-color: #FFC4DB ; 
+    color: white ; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#cartel2 button:hover {
+    color: #CE5484;
+}
+

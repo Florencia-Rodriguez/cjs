@@ -1,3 +1,5 @@
+/*
+
 //array de tortas
 const tortas = [
     {
@@ -84,7 +86,45 @@ function comprarTorta() {
 comprarTorta();
 
 
+*/
+
+// Función para mostrar el cartel después de un retraso
+function mostrarCartel() {
+    document.getElementById("cartel").style.display = "block";
+}
+
+// Mostrar el cartel después de 5 segundos (5000 ms)
+setTimeout(mostrarCartel, 5000);
+
+// Cerrar el cartel al hacer clic en el botón "Cerrar"
+document.getElementById("cerrarCartel").addEventListener("click", function() {
+    document.getElementById("cartel").style.display = "none";
+});
 
 
 
+let formularioBienvenida = document.getElementById("form-b");
+formularioBienvenida.addEventListener("submit", function(e) {
+    e.preventDefault();
 
+    const nombre = document.querySelector('input[name="nombre"]').value;
+    const email = document.querySelector('input[name="email"]').value;
+
+    const usuario = {
+        nombre: nombre,
+        email: email
+    };
+
+    // Almacenar el objeto como JSON en localStorage
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+
+    // Muestra el segundo cartel o realiza otra acción según tus necesidades
+    document.getElementById("cartel").classList.add("oculto");
+    document.getElementById("cartel2").classList.remove("oculto");
+    console.log("Formulario enviado");
+});
+
+// Agregar un evento para cerrar el segundo cartel
+document.getElementById("cerrarCartel2").addEventListener("click", function() {
+    document.getElementById("cartel2").classList.add("oculto");
+});
