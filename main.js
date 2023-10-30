@@ -118,7 +118,7 @@ formularioBienvenida.addEventListener("submit", function(e) {
     // Almacenar el objeto como JSON en localStorage
     localStorage.setItem("usuario", JSON.stringify(usuario));
 
-    // Muestra el segundo cartel o realiza otra acción según tus necesidades
+
     document.getElementById("cartel").classList.add("oculto");
     document.getElementById("cartel2").classList.remove("oculto");
     console.log("Formulario enviado");
