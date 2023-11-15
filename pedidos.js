@@ -1,7 +1,29 @@
 
 const tortas = [
     {
+        nombre: "pavloa",
+        precio: 6000,
+        preciosPorCuotas: {
+            1: 6000,
+            2: 3000,
+            3: 2000
+        },
+        precioDescuento10: 5100,
+        costoVelas: 600,
+    },
+    {
         nombre: "marquise",
+        precio: 6000,
+        preciosPorCuotas: {
+            1: 6000,
+            2: 3000,
+            3: 2000
+        },
+        precioDescuento10: 5100,
+        costoVelas: 600,
+    },
+    {
+        nombre: "budin",
         precio: 6000,
         preciosPorCuotas: {
             1: 6000,
@@ -35,11 +57,48 @@ const tortas = [
     }
 ];
 
+//MAIL!!!!!!!!
+// Para enviar mail
+const nodemailer = require('nodemailer');
+
+// Configura el transporter
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'resumenesflore@gmail.com',
+        pass: 'pApimAmi2702'
+    }
+});
+
+
+
+
 function comprarTorta() {
     const inputContainer = document.getElementById('input-container');
+    const volverAtrasBtn = document.getElementById('volverAtrasBtn');
+    const opcionesContainer = document.getElementById('opcionesContainer');
+    const empezarBtn = document.getElementById('empezarBtn');
+
+    volverAtrasBtn.style.display = 'none';
+
+    opcionesContainer.style.display = 'none';
+    empezarBtn.style.display = 'none';
+
     inputContainer.innerHTML = `
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" placeholder="Ingrese su nombre">
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" placeholder="Ingrese su apellido">
+        
         <label for="tortaInput">¿Qué torta desea comprar?</label>
-        <input type="text" id="tortaInput" placeholder="Ingrese el nombre de la torta">
+        <select id="tortaInput">
+            <option value="pavloa">Pavloa</option>
+            <option value="budin">Budin</option>
+            <option value="chocotorta">Chocotorta</option>
+            <option value="cheesecake">Cheesecake</option>
+            <option value="marquise">Marquise</option>
+        </select>
 
         <label for="velasInput">¿Quiere agregar velas? (si/no)</label>
         <input type="text" id="velasInput" placeholder="Ingrese 'si' o 'no'">
@@ -52,10 +111,14 @@ function comprarTorta() {
 }
 
 function procesarCompra() {
+    const nombreInput = document.getElementById('nombre');
+    const apellidoInput = document.getElementById('apellido');
     const tortaInput = document.getElementById('tortaInput');
     const velasInput = document.getElementById('velasInput');
     const codigoDescuentoInput = document.getElementById('codigoDescuento');
 
+    const nombre = nombreInput.value;
+    const apellido = apellidoInput.value;
     const tortaNombre = tortaInput.value.toLowerCase();
     const agregarVelas = velasInput.value.toLowerCase();
     const codigoDescuento = codigoDescuentoInput.value.toUpperCase(); 
@@ -63,16 +126,15 @@ function procesarCompra() {
     const torta = tortas.find(torta => torta.nombre === tortaNombre);
 
     if (!torta) {
-        // alert("Torta no encontrada. Por favor, ingrese una torta válida.");
         Swal.fire({
             icon: "error",
             title: "Torta no disponible",
             text: "Porfavor elegi una torta del catalogo",
-            });
+        });
         return;
     }
 
-    let costoPorCuota = torta.preciosPorCuotas[1] || 0; // Por defecto, sin cuotas porque no quiero, en el caso de querer activar cuotas lo edito.
+    let costoPorCuota = torta.preciosPorCuotas[1] || 0;
     let costoVelas = 0;
 
     if (agregarVelas === 'si' && torta.costoVelas) {
@@ -81,23 +143,72 @@ function procesarCompra() {
 
     let seAplicoDescuento = false;
 
-    // Aplicar descuento si el código es válido
     if (codigoDescuento === 'POC10' && torta.precioDescuento10) {
         costoPorCuota = torta.precioDescuento10;
         seAplicoDescuento = true;
     }
 
-    mostrarResultado(tortaNombre, costoPorCuota, costoVelas, seAplicoDescuento);
+    mostrarResultado(nombre, apellido, tortaNombre, costoPorCuota, costoVelas, seAplicoDescuento);
 }
 
-function mostrarResultado(tortaNombre, costoPorCuota, costoVelas, seAplicoDescuento) {
+
+
+function mostrarResultado(nombre, apellido, tortaNombre, costoPorCuota, costoVelas, seAplicoDescuento) {
+    const inputContainer = document.getElementById('input-container');
     const outputDiv = document.getElementById('output');
+    const volverAtrasBtn = document.getElementById('volverAtrasBtn');
+    const opcionesContainer = document.getElementById('opcionesContainer');
+    const empezarBtn = document.getElementById('empezarBtn');
+
+    // Oculta el formulario
+    inputContainer.style.display = 'none';
+
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Pedido Procesado",
+        showConfirmButton: false,
+        timer: 1500
+        
+        });
+    
     outputDiv.innerHTML = `
-        <h2>Tu pedido:</h2>
+        <h2>Tu pedido ${nombre} ${apellido}:</h2>
         <p>Eligió la torta ${tortaNombre},</p>
         ${costoVelas ? `<p>Costo adicional por velas: ${costoVelas} pesos.</p>` : ''}
         <p>Total: ${costoPorCuota + costoVelas} pesos.</p>
         ${seAplicoDescuento ? `<p class="descuento">¡Se aplicó un descuento del 10%!</p>` : ''}
+        <p>Alias: Peace.Of.Cakes CBU:0000022222233333</p>
+        <p class="alertapedido">Para finalizar el pedido enviar comprobante de pago junto con los datos del pedido a peaceofcakes@gmail.com luego de hacer la transferencia.</p>
     `;
     outputDiv.style.display = 'block';
+
+    volverAtrasBtn.style.display = 'block';
+
+    opcionesContainer.style.display = 'none';
+    empezarBtn.style.display = 'none';
 }
+
+
+function volverAtras() {
+    const inputContainer = document.getElementById('input-container');
+    const outputDiv = document.getElementById('output');
+    const volverAtrasBtn = document.getElementById('volverAtrasBtn');
+    const opcionesContainer = document.getElementById('opcionesContainer');
+    const empezarBtn = document.getElementById('empezarBtn');
+
+
+    // Muestra el formulario
+    inputContainer.style.display = 'block';
+
+    // Oculta los resultados
+    outputDiv.style.display = 'none';
+
+    // Oculta el botón de volver atrás
+    volverAtrasBtn.style.display = 'none';
+
+    opcionesContainer.style.display = 'block';
+    empezarBtn.style.display = 'block';
+}
+
+
