@@ -63,7 +63,12 @@ function procesarCompra() {
     const torta = tortas.find(torta => torta.nombre === tortaNombre);
 
     if (!torta) {
-        alert("Torta no encontrada. Por favor, ingrese una torta válida.");
+        // alert("Torta no encontrada. Por favor, ingrese una torta válida.");
+        Swal.fire({
+            icon: "error",
+            title: "Torta no disponible",
+            text: "Porfavor elegi una torta del catalogo",
+            });
         return;
     }
 
@@ -88,11 +93,11 @@ function procesarCompra() {
 function mostrarResultado(tortaNombre, costoPorCuota, costoVelas, seAplicoDescuento) {
     const outputDiv = document.getElementById('output');
     outputDiv.innerHTML = `
-        <h2>Tu compra:</h2>
+        <h2>Tu pedido:</h2>
         <p>Eligió la torta ${tortaNombre},</p>
         ${costoVelas ? `<p>Costo adicional por velas: ${costoVelas} pesos.</p>` : ''}
         <p>Total: ${costoPorCuota + costoVelas} pesos.</p>
-        ${seAplicoDescuento ? `<p>¡Se aplicó un descuento del 10%!</p>` : ''}
+        ${seAplicoDescuento ? `<p class="descuento">¡Se aplicó un descuento del 10%!</p>` : ''}
     `;
     outputDiv.style.display = 'block';
 }
