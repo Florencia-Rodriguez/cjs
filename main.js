@@ -93,8 +93,8 @@ function mostrarCartel() {
     document.getElementById("cartel").style.display = "block";
 }
 
-// Mostrar el cartel después de 5 segundos (5000 ms)
-setTimeout(mostrarCartel, 5000);
+// Mostrar el cartel después de 3 segundos (3000 ms)
+setTimeout(mostrarCartel, 3000);
 
 // Cerrar el cartel al hacer clic en el botón "Cerrar"
 document.getElementById("cerrarCartel").addEventListener("click", function() {
