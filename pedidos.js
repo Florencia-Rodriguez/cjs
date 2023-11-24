@@ -212,3 +212,37 @@ function volverAtras() {
 }
 
 
+
+
+// Obtener la fecha actual
+const fechaActual = new Date();
+const añoActual = fechaActual.getFullYear();
+const mesActual = fechaActual.getMonth() + 1; // Se suma 1 ya que los meses son indexados desde 0
+const diaActual = fechaActual.getDate();
+
+// Elemento p mostrar el resultado 
+const resultadoElemento = document.getElementById('resultadoEnvioRetiro');
+
+// Realizar la solicitud a la API para verificar si es un día festivo
+fetch(`https://date.nager.at/api/v2/PublicHolidays/${añoActual}/us`)
+    .then(response => response.json())
+    .then(data => {
+        console.log('Datos obtenidos:', data);
+        // Comprueba si el día actual es un día festivo
+        const esDiaFestivo = data.some(holiday => {
+            const fechaHoliday = new Date(holiday.date);
+            return fechaHoliday.getMonth() + 1 === mesActual && fechaHoliday.getDate() === diaActual;
+        });
+
+        // Modificar el contenido del elemento en el pie de página
+        resultadoElemento.textContent = esDiaFestivo ? 'Hoy es un día festivo. No hay envío/retiro disponible.' : 'Hoy no es un día festivo. Puedes realizar envío/retiro.';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // En caso de error
+        resultadoElemento.textContent = 'Error al obtener la información. Inténtalo de nuevo más tarde.';
+    });
+
+
+
+
